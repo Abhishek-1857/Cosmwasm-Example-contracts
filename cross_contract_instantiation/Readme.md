@@ -42,10 +42,25 @@ pub fn execute(
 This `execute` function takes a enum of `ExecuteMsg` which actually contains all the contract function and matches them with the function user is calling. In our case `Instantiate`. Then it calls `try_instantiate` function:
 
 ```rust
-pub fn try_instantiate(
-    _deps: DepsMut,
-    info: MessageInfo
-    ) -> Result<Response, ContractError> 
+pub fn try_instantiate(_deps: DepsMut, info: MessageInfo) -> Result<Response, ContractError> {
+    // Creating instantiate message of contract 1 from this contract
+    let instantiation_msg = contract_1::msg::InstantiateMsg { count: 1 };
+
+    // Instantiating the contract 1
+    let msgs = CosmosMsg::Wasm(cosmwasm_std::WasmMsg::Instantiate {
+        admin: None,
+        code_id: 0,
+        msg: to_binary(&instantiation_msg)?,
+        funds: info.funds,
+        label: "Cross_Contract_instantiation".to_string(),
+    });
+
+    let res = Response::new()
+        .add_attribute("method", "instantiate_another")
+        .add_message(msgs);
+
+    Ok(res)
+}
 ```
 
 It creates a `InstantiateMsg` struct containing the necessary information for the `contract-1` contract instantiation:

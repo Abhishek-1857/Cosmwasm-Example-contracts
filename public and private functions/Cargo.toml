@@ -13,3 +13,4 @@ cw-storage-plus = "1.0.1"
 schemars = "0.8.1"
 serde = { version = "1.0.127", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0.20" }
+cw2 = "1.0.1"

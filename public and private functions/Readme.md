@@ -43,11 +43,28 @@ pub fn public_function(
     _env: Env,
     _info: MessageInfo,
     param: String,
-) -> Result<Response, ContractError> 
+) -> Result<Response, ContractError> {
+    // Perform the desired logic
+    let result = do_something(param);
+
+    // Return a response
+    let response = Response::new().add_attribute("result", result);
+
+    Ok(response)
+}
 ```
 
 we have a public function called `public_function` that takes a param parameter of type String. This function can be called externally. Inside the public function, we invoke a private function called `do_something`, which performs some internal logic and returns a string result. The public function then constructs a response, including an attribute with the result.
 
 The `do_something `function is a private helper function that can only be called within the contract. It performs some internal logic and returns a result.
+
+```rust
+fn do_something(param: String) -> String {
+    // Perform some internal logic
+    let result = format!("Doing something with param: {}", param);
+
+    result
+}
+```
 
 ---
