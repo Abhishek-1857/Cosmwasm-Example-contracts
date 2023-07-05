@@ -18,7 +18,7 @@ use crate::msg::{
 use crate::state::{Fees, Token, FEES, FROZEN, OWNER, TOKEN1, TOKEN2, TOTAL_STORED};
 
 // Version info for migration info
-pub const CONTRACT_NAME: &str = "crates.io:wasmswap";
+pub const CONTRACT_NAME: &str = "crates.io:product-amm";
 pub const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 const FEE_SCALE_FACTOR: Uint128 = Uint128::new(10_000);
@@ -460,6 +460,7 @@ fn get_input_price(
         .checked_div(denominator)
         .map_err(StdError::divide_by_zero)?
         .try_into()?)
+   
 }
 
 fn get_protocol_fee_amount(input_amount: Uint128, fee_percent: Decimal) -> StdResult<Uint128> {
