@@ -10,7 +10,7 @@ use crate::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
 use crate::state::*;
 
 // version info for migration info
-const CONTRACT_NAME: &str = "crates.io:variables";
+const CONTRACT_NAME: &str = "crates.io:recieve_cw20";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[cfg_attr(not(feature = "library"), entry_point)]
